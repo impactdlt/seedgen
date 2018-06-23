@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>seedgen</title>
+		<script type="text/javascript" src="sjcl.js"></script>
+		<style>
+			body {
+				font-family: monospace;
+				font-size: 8pt;
+			}
+			#main {
+				display: flex;
+				justify-content: center;
+				height: 100vh;
+				align-items: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="disc">This seed is generated in your browser and not sent anywhere. You can also turn off your internet after the page has loaded.</div>
+		<div id="main">
+			<h1 id="seed">WAIT</h1>
+		</div>
+		<script type="text/javascript">
+			var gen = new sjcl.prng(10);
+			gen.startCollectors();
+			sjcl.random.addEventListener("seeded", function() { document.getElementById("seed").innerText = genSeed(); });
+			sjcl.random.addEventListener("progress", function(p) { 
+				if(p != 1) {
+					document.getElementById("seed").innerText = "Collecting entropy, please move your mouse/device\nProgress: " + p * 100 + "%"
+				}
+			});
+			
+			function genSeed() {
+				var seed = "";
+				for(;seed.length < 81;seed += sjcl.codec.base64.fromBits(sjcl.random.randomWords(33, 10)).replace(/[^A-Z9]+/g, '')) {};
+				return seed.substring(0,81);
+			}
+		</script>
+	</body>
+</html>
