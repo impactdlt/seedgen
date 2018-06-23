@@ -2,36 +2,35 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>seedgen</title>
+		<title>ΛCYLIC LΛBS | Tangle SEED generator</title>
+		<link rel="shortcut icon" type="image/x-icon" href="https://acycliclabs.com/favicon-196x196.png" />
+		<link href="style.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 		<script type="text/javascript" src="sjcl.js"></script>
-		<style>
-			body {
-				font-family: monospace;
-				font-size: 8pt;
-			}
-			#main {
-				display: flex;
-				justify-content: center;
-				height: 100vh;
-				align-items: center;
-			}
-		</style>
 	</head>
 	<body>
-		<div id="disc">This seed is generated in your browser and not sent anywhere. You can also turn off your internet after the page has loaded.</div>
-		<div id="main">
+		<div class="menu">
+	        <i class="fa fa-bars fa-2x"></i>
+	        <ul>
+	            <a href="/about"><li>About</li></a>
+	            <a href="https://acycliclabs.com/#contact" target="_blank"><li>Contact</li></a>
+	            <a href="https://acycliclabs.com/" target="_blank"><li>Acyclic Labs</li></a>
+	        </ul>
+	    </div>
+		<div id="disc" class="disc">This seed is generated in your browser and not sent anywhere. You can also turn off your internet after the page has loaded.</div>
+		<div id="main" class="main">
 			<h1 id="seed">WAIT</h1>
 		</div>
 		<script type="text/javascript">
 			var gen = new sjcl.prng(10);
 			gen.startCollectors();
 			sjcl.random.addEventListener("seeded", function() { document.getElementById("seed").innerText = genSeed(); });
-			sjcl.random.addEventListener("progress", function(p) { 
+			sjcl.random.addEventListener("progress", function(p) {
 				if(p != 1) {
 					document.getElementById("seed").innerText = "Collecting entropy, please move your mouse/device\nProgress: " + p * 100 + "%"
 				}
 			});
-			
+
 			function genSeed() {
 				var seed = "";
 				for(;seed.length < 81;seed += sjcl.codec.base64.fromBits(sjcl.random.randomWords(33, 10)).replace(/[^A-Z9]+/g, '')) {};
