@@ -1,5 +1,5 @@
 body {
-    font-family: monospace;
+    font-family: 'Roboto', monospace;
     font-size: 8pt;
     background-color: #7fd8ab;
 }
@@ -95,4 +95,9 @@ body {
 
 .menu a {
     text-decoration: none;
+}
+
+.about-div {
+    margin-top: 5rem;
+    margin-left: 5rem;
 }
