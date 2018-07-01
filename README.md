@@ -1,4 +1,4 @@
-# [SEED Generator for Tangle](https://acycliclabs.github.io/seedgen/)
+# [SEED Generator for Tangle](https://impactdlt.github.io/seedgen/)
 
 ## SEED
 You must generate a random 81 character seed using only A-Z and the number 9. It is imperative that your seed be an 81 character random assortment of A-Z and 9.
